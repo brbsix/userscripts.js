@@ -12,5 +12,5 @@
 (function() {
     'use strict';
 
-    location.replace('https://archive.is/?run=1&url=' + encodeURIComponent(new URLSearchParams(location.search.substring(1)).get('URI').split('?')[0]));
+    location.assign('https://archive.is/?run=1&url=' + encodeURIComponent(new URLSearchParams(location.search.substring(1)).get('URI').split('?')[0]));
 })();
