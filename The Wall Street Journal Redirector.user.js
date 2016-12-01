@@ -15,7 +15,7 @@
         return document.querySelector(`meta[name='${name}']`).content;
     }
 
-    if (getMetaContent('article.access') !== 'free' || getMetaContent('article.template') !== 'full') {
+    if (getMetaContent('article.template') !== 'full') {
         location.assign(`https://archive.is/?run=1&url=${location.href}`);
     }
 })();
