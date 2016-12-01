@@ -12,10 +12,10 @@
     'use strict';
 
     function getMetaContent(name) {
-        return document.querySelector('meta[name="' + name + '"]').content;
+        return document.querySelector(`meta[name='${name}']`).content;
     }
 
     if (getMetaContent('article.access') !== 'free' || getMetaContent('article.template') !== 'full') {
-        location.assign('https://archive.is/?run=1&url=' + location.href);
+        location.assign(`https://archive.is/?run=1&url=${location.href}`);
     }
 })();
