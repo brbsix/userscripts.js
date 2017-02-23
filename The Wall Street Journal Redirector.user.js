@@ -20,10 +20,6 @@
         }
     }
 
-    function getMetaContent(name) {
-        return document.querySelector(`meta[name='${name}']`).content;
-    }
-
     function getArchive(url) {
         const host = 'https://archive.is';
 
@@ -45,6 +41,10 @@
                 }
             }
         });
+    }
+
+    function getMetaContent(name) {
+        return document.querySelector(`meta[name='${name}']`).content;
     }
 
     if (getMetaContent('article.template') !== 'full') {
