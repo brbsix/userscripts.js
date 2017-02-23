@@ -4,7 +4,7 @@
 // @version      0.1
 // @author       Brian Beffa <brbsix@gmail.com>
 // @description  Bypass The Wall Street Journal paywall by redirecting to an archive of the page
-// @match        http://www.wsj.com/articles/*
+// @match        https://www.wsj.com/articles/*
 // @connect      archive.is
 // @grant        GM_info
 // @grant        GM_log
