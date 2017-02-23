@@ -7,19 +7,15 @@
 // @match        https://myaccount.nytimes.com/auth/login?URI=*
 // @connect      archive.is
 // @run-at       document-start
+// @grant        GM_info
+// @grant        GM_log
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
 (function() {
     'use strict';
 
-    const TM_DEBUG = 1;
-
-    function debug(msg) {
-        if (TM_DEBUG) {
-            console.log('Tampermonkey: ' + msg);
-        }
-    }
+    const scriptName = GM_info.script.name;
 
     function getArchive(url) {
         const host = 'https://archive.is';
@@ -28,22 +24,25 @@
             method: 'GET',
             url: host + '/timemap/' + url,
             onload: function(response) {
-                debug('response.readyState: ' + response.readyState);
-                debug('response.responseHeaders: ' + response.responseHeaders);
-                debug('response.responseText: ' + response.responseText);
-                debug('response.status: ' + response.status);
-                debug('response.statusText: ' + response.statusText);
                 if (response.status === 200) {
-                    debug('opening existing snapshot');
+                    log('opening existing snapshot');
                     location.assign(host + '/timegate/' + url);
                 } else if (response.status === 404) {
-                    debug('creating snapshot');
+                    log('creating snapshot');
                     location.assign(host + '/?run=1&url=' + encodeURIComponent(url));
                 }
             }
         });
     }
 
-    debug('detects paywalled NYT article');
+    function log(msg) {
+        if (msg) {
+            GM_log(scriptName + ':', msg);
+        } else {
+            GM_log(scriptName);
+        }
+    }
+
+    log('detects paywalled NYT article');
     getArchive(new URLSearchParams(window.location.search.substring(1)).get('URI').split('?')[0]);
 })();

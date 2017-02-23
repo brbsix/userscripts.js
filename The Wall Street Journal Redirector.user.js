@@ -6,19 +6,15 @@
 // @description  Bypass The Wall Street Journal paywall by redirecting to an archive of the page
 // @match        http://www.wsj.com/articles/*
 // @connect      archive.is
+// @grant        GM_info
+// @grant        GM_log
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
 (function() {
     'use strict';
 
-    const TM_DEBUG = 1;
-
-    function debug(msg) {
-        if (TM_DEBUG) {
-            console.log('Tampermonkey: ' + msg);
-        }
-    }
+    const scriptName = GM_info.script.name;
 
     function getArchive(url) {
         const host = 'https://archive.is';
@@ -27,16 +23,11 @@
             method: 'GET',
             url: host + '/timemap/' + url,
             onload: function(response) {
-                debug('response.readyState: ' + response.readyState);
-                debug('response.responseHeaders: ' + response.responseHeaders);
-                debug('response.responseText: ' + response.responseText);
-                debug('response.status: ' + response.status);
-                debug('response.statusText: ' + response.statusText);
                 if (response.status === 200) {
-                    debug('opening existing snapshot');
+                    log('opening existing snapshot');
                     location.assign(host + '/timegate/' + url);
                 } else if (response.status === 404) {
-                    debug('creating snapshot');
+                    log('creating snapshot');
                     location.assign(host + '/?run=1&url=' + encodeURIComponent(url));
                 }
             }
@@ -47,8 +38,16 @@
         return document.querySelector(`meta[name='${name}']`).content;
     }
 
+    function log(msg) {
+        if (msg) {
+            GM_log(scriptName + ':', msg);
+        } else {
+            GM_log(scriptName);
+        }
+    }
+
     if (getMetaContent('article.template') !== 'full') {
-        debug('detects paywalled WSJ article');
+        log('detects paywalled WSJ article');
         getArchive(window.location.href);
     }
 })();

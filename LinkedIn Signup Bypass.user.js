@@ -5,11 +5,22 @@
 // @author       Brian Beffa <brbsix@gmail.com>
 // @description  Bypass signup-related crud on LinkedIn profile pages
 // @match        https://www.linkedin.com/in/*
-// @grant        none
+// @grant        GM_info
+// @grant        GM_log
 // ==/UserScript==
 
 (function() {
     'use strict';
+
+    const scriptName = GM_info.script.name;
+
+    function log(msg) {
+        if (msg) {
+            GM_log(scriptName + ':', msg);
+        } else {
+            GM_log(scriptName);
+        }
+    }
 
     function removeNodes(selector) {
         document.querySelectorAll(selector).forEach(
@@ -18,6 +29,8 @@
             }
         );
     }
+
+    log();
 
     // hide signup overlay
     removeNodes('#advocate-modal');
