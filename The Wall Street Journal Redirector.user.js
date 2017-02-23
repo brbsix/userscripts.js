@@ -12,7 +12,7 @@
 (function() {
     'use strict';
 
-    var TM_DEBUG = 1;
+    const TM_DEBUG = 1;
 
     function debug(msg) {
         if (TM_DEBUG) {
