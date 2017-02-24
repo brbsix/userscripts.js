@@ -29,5 +29,7 @@
     // scripts also, so we want to prevent it from being used. The site checks
     // whether _wm is undefined in order to determine if an ad blocker is being
     // used, so all that we have to do is set it to something else (e.g. null).
+    //
+    // NOTE: ensure expla5.js is not blocked by other ad-blocking software
     _wm = null;
 })();
