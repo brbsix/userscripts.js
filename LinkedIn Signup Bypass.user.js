@@ -4,6 +4,7 @@
 // @version      0.1
 // @author       Brian Beffa <brbsix@gmail.com>
 // @description  Bypass signup-related crud on LinkedIn profile pages
+// @match        http://www.linkedin.com/in/*
 // @match        https://www.linkedin.com/in/*
 // @grant        GM_info
 // @grant        GM_log
