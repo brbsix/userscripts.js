@@ -1,0 +1,32 @@
+{
+    // Enforcing
+    "curly": true,
+    "eqeqeq": true,
+    "esversion": 6,
+    "forin": true,
+    "freeze": true,
+    "latedef": true,
+    "nonbsp": true,
+    "nonew": true,
+    "notypeof": true,
+    "singleGroups": true,
+    "strict": true,
+    "undef": true, 
+    "unused": true,
+    "varstmt": true,
+
+    // To be deprecated
+    "indent": 4,
+    "quotmark": "single",
+
+    // Environment
+    "browser": true,
+
+    // Greasemonkey globals
+    "globals": {
+        "GM_info": true,
+        "GM_log": true,
+        "GM_xmlhttpRequest": true,
+        "unsafeWindow": true
+    }
+}
