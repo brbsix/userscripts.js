@@ -17,6 +17,7 @@
 
     // To be deprecated
     "indent": 4,
+    "multistr": true,
     "quotmark": "single",
 
     // Environment
