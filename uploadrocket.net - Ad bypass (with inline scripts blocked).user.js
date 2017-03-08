@@ -19,14 +19,9 @@
 (function () {
     'use strict';
 
-    let log = (function () {
-        const scriptName = GM_info.script.name;
-        return function () {
-            const prefix = arguments.length > 0 ? scriptName + ':' : scriptName;
-            const args = Array.from(arguments);
-            GM_log(...[prefix, ...args]);
-        };
-    })();
+    function log () {
+        GM_log(...[arguments.length ? GM_info.script.name + ':' : GM_info.script.name, ...arguments]);
+    }
 
     // assist with captcha loaded in iframe
     if (window.self === window.top) {

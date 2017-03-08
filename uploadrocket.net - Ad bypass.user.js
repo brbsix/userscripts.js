@@ -17,14 +17,8 @@
 (function () {
     'use strict';
 
-    function log (msg) {
-        const scriptName = GM_info.script.name;
-
-        if (arguments.length === 0) {
-            GM_log(scriptName);
-        } else {
-            GM_log(scriptName + ':', msg);
-        }
+    function log () {
+        GM_log(...[arguments.length ? GM_info.script.name + ':' : GM_info.script.name, ...arguments]);
     }
 
     // defuse Ad Maven
