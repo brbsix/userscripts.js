@@ -10,22 +10,22 @@
 // @grant        GM_log
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
-    const scriptName = GM_info.script.name;
+    function log (msg) {
+        const scriptName = GM_info.script.name;
 
-    function log(msg) {
-        if (msg) {
-            GM_log(scriptName + ':', msg);
-        } else {
+        if (arguments.length === 0) {
             GM_log(scriptName);
+        } else {
+            GM_log(scriptName + ':', msg);
         }
     }
 
-    function removeNodes(selector) {
+    function removeNodes (selector) {
         document.querySelectorAll(selector).forEach(
-            function(e) {
+            function (e) {
                 e.parentNode.removeChild(e);
             }
         );
