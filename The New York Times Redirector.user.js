@@ -9,40 +9,60 @@
 // @run-at       document-start
 // @grant        GM_info
 // @grant        GM_log
+// @grant        GM_unsafeWindow
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
-    const scriptName = GM_info.script.name;
+    function log (msg) {
+        const scriptName = GM_info.script.name;
 
-    function getArchive(url) {
+        if (arguments.length === 0) {
+            GM_log(scriptName);
+        } else {
+            GM_log(scriptName + ':', msg);
+        }
+    }
+
+    function openArchive (url = window.location.href) {
         const host = 'https://archive.is';
 
         GM_xmlhttpRequest({
             method: 'GET',
-            url: host + '/timemap/' + url,
-            onload: function(response) {
+            url: new window.URL(['timemap', url].join('/'), host).href,
+            onload: function (response) {
+                let archiveURL;
+                log(`opening archive of ${url}`);
                 if (response.status === 200) {
                     log('opening existing snapshot');
-                    location.assign(host + '/timegate/' + url);
+                    archiveURL = new window.URL(['timegate', url].join('/'), host);
                 } else if (response.status === 404) {
                     log('creating snapshot');
-                    location.assign(host + '/?run=1&url=' + encodeURIComponent(url));
+                    archiveURL = new window.URL(host);
+                    archiveURL.searchParams.set('run', '1');
+                    archiveURL.searchParams.set('url', url);
                 }
+                window.location.assign(archiveURL.href);
             }
         });
     }
 
-    function log(msg) {
-        if (msg) {
-            GM_log(scriptName + ':', msg);
-        } else {
-            GM_log(scriptName);
-        }
-    }
-
     log('detects paywalled NYT article');
-    getArchive(new URLSearchParams(window.location.search.substring(1)).get('URI').split('?')[0]);
+
+    const redirectURL = new window.URL((function () {
+        if (typeof unsafeWindow.NYTD.success_redirect_url === 'string') {
+            log('obtaining article URL from unsafeWindow.NYTD.success_redirect_url');
+            return unsafeWindow.NYTD.success_redirect_url;
+        } else {
+            log('manually obtaining article URL by parsing this page\'s search parameters');
+            return new window.URL(window.location).searchParams.get('URI');
+        }
+    })());
+
+    // strip away problematic parameters
+    redirectURL.search = '';
+
+    openArchive(redirectURL.href);
 })();

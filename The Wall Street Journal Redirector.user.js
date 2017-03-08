@@ -12,43 +12,48 @@
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
-    const scriptName = GM_info.script.name;
+    function log (msg) {
+        const scriptName = GM_info.script.name;
 
-    function getArchive(url) {
+        if (arguments.length === 0) {
+            GM_log(scriptName);
+        } else {
+            GM_log(scriptName + ':', msg);
+        }
+    }
+
+    function openArchive (url = window.location.href) {
         const host = 'https://archive.is';
 
         GM_xmlhttpRequest({
             method: 'GET',
-            url: host + '/timemap/' + url,
-            onload: function(response) {
+            url: new window.URL(['timemap', url].join('/'), host).href,
+            onload: function (response) {
+                let archiveURL;
+                log(`opening archive of ${url}`);
                 if (response.status === 200) {
                     log('opening existing snapshot');
-                    location.assign(host + '/timegate/' + url);
+                    archiveURL = new window.URL(['timegate', url].join('/'), host);
                 } else if (response.status === 404) {
                     log('creating snapshot');
-                    location.assign(host + '/?run=1&url=' + encodeURIComponent(url));
+                    archiveURL = new window.URL(host);
+                    archiveURL.searchParams.set('run', '1');
+                    archiveURL.searchParams.set('url', url);
                 }
+                window.location.assign(archiveURL.href);
             }
         });
     }
 
-    function getMetaContent(name) {
+    function getMetaContent (name) {
         return document.querySelector(`meta[name='${name}']`).content;
-    }
-
-    function log(msg) {
-        if (msg) {
-            GM_log(scriptName + ':', msg);
-        } else {
-            GM_log(scriptName);
-        }
     }
 
     if (getMetaContent('article.template') !== 'full') {
         log('detects paywalled WSJ article');
-        getArchive(window.location.href);
+        openArchive();
     }
 })();
