@@ -22,12 +22,14 @@
 
     // Environment
     "browser": true,
+    "devel": true,
 
     // Greasemonkey globals
     "globals": {
         "GM_addStyle": true,
         "GM_info": true,
         "GM_log": true,
+        "GM_setClipboard": true,
         "GM_xmlhttpRequest": true,
         "unsafeWindow": true
     }
