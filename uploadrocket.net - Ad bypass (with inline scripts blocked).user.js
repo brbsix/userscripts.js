@@ -5,8 +5,6 @@
 // @author       Brian Beffa <brbsix@gmail.com>
 // @description  Bypass the insidious ad technology used by uploadrocket.net
 // @match        http://uploadrocket.net/*
-// @match        http://uploadrocket.net/*
-// @match        http://api.solvemedia.com/*
 // @match        http://api.solvemedia.com/papi/media?*
 // @run-at       document-end
 // @grant        GM_addStyle
