@@ -7,6 +7,7 @@
 // @description  Add small magnet links to search results
 // @match        http://rarbg.to/torrents.php?search=*
 // @match        https://rarbg.to/torrents.php?search=*
+// @icon         http://www.rarbg.to/favicon.ico
 // @require      https://raw.githubusercontent.com/SGrondin/bottleneck/master/bottleneck.min.js
 // @run-at       document-end
 // @grant        GM_addStyle
