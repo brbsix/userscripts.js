@@ -98,8 +98,8 @@
         l => l.text !== '' && l.href.indexOf('#') === -1
     ).forEach(
         l => l.onmouseenter = () => {
-            rateLimiter.schedule(insertMagnetLink, l);
             l.onmouseenter = undefined;
+            rateLimiter.schedule(insertMagnetLink, l);
         }
     );
 
