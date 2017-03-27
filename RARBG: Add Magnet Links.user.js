@@ -5,8 +5,8 @@
 // @version      0.1
 // @author       Brian Beffa <brbsix@gmail.com>
 // @description  Add small magnet links to search results
-// @match        http://rarbg.to/*
-// @match        https://rarbg.to/*
+// @match        http://rarbg.to/torrents.php?search=*
+// @match        https://rarbg.to/torrents.php?search=*
 // @require      https://raw.githubusercontent.com/SGrondin/bottleneck/master/bottleneck.min.js
 // @run-at       document-end
 // @grant        GM_addStyle
