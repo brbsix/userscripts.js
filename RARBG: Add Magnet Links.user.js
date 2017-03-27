@@ -97,7 +97,10 @@
     ).filter(
         l => l.text !== '' && l.href.indexOf('#') === -1
     ).forEach(
-        l => rateLimiter.schedule(insertMagnetLink, l)
+        l => l.onmouseenter = () => {
+            rateLimiter.schedule(insertMagnetLink, l);
+            l.onmouseenter = undefined;
+        }
     );
 
 })();
