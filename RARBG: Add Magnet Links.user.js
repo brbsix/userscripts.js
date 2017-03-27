@@ -31,11 +31,15 @@
         return magnetElement;
     }
 
-    function findMagnetHref (html) {
-        const responsePage = document.createElement('html');
-        responsePage.innerHTML = html;
+    function createPage (html) {
+        const createdPage = document.createElement('html');
+        createdPage.innerHTML = html;
 
-        const magnetElementFound = responsePage.querySelector('a[href^="magnet:"]');
+        return createdPage;
+    }
+
+    function findMagnetHref (doc) {
+        const magnetElementFound = doc.querySelector('a[href^="magnet:"]');
 
         return magnetElementFound === null ? null : magnetElementFound.href;
     }
@@ -48,15 +52,34 @@
             })
             .then(response => response.text())
             .then(function (html) {
-                log(`inserting magnet link for ${url}`);
-
-                const magnetHref = findMagnetHref(html);
-
-                if (magnetHref === null) {
-                    throw new Error((html.indexOf('/threat_defence.php?') !== -1 ? 'host has blocked attempt' : 'failed') + ` to scrape magnet link from ${url}`);
+                log(`attempting to scrape magnet link from HTML of ${url}`);
+                const responsePage = createPage(html);
+                const magnetHrefFromHtml = findMagnetHref(responsePage);
+                if (magnetHrefFromHtml !== null) {
+                    log(`successfully scraped magnet link from HTML of ${url}`);
+                    torrentLink.after(createMagnetLink(magnetHrefFromHtml));
+                    return;
                 }
 
-                torrentLink.after(createMagnetLink(magnetHref));
+                log(`attempting to scrape magnet link from ${url} in a new window`);
+                const responseWindow = open(
+                    url,
+                    '_blank',
+                    'menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,visible=none,height=100,width=100,left=10000,top=10000',
+                    false
+                );
+                responseWindow.onload = function () {
+                    log(`${url} window finished loading`);
+                    const magnetHrefFromWindow = findMagnetHref(responseWindow.document);
+                    responseWindow.close();
+                    if (magnetHrefFromWindow !== null) {
+                        log(`successfully scraped magnet link from new window of ${url}`);
+                        torrentLink.after(createMagnetLink(magnetHrefFromWindow));
+                        return;
+                    } else {
+                        throw new Error((html.indexOf('/threat_defence.php?') !== -1 ? 'host has blocked attempt' : 'failed') + ` to scrape magnet link from ${url}`);
+                    }
+                };
             });
     }
 
