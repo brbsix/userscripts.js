@@ -15,6 +15,10 @@
 (function () {
     'use strict';
 
+    function getMetaContent (name) {
+        return document.querySelector(`meta[name='${name}']`).content;
+    }
+
     function log () {
         GM_log(...[arguments.length ? GM_info.script.name + ':' : GM_info.script.name, ...arguments]);
     }
@@ -40,10 +44,6 @@
                 window.location.assign(archiveURL.href);
             }
         });
-    }
-
-    function getMetaContent (name) {
-        return document.querySelector(`meta[name='${name}']`).content;
     }
 
     if (getMetaContent('article.template') !== 'full') {
