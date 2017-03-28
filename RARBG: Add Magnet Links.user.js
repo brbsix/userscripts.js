@@ -50,11 +50,15 @@
             .then(response => response.text())
             .then(html => {
                 log(`attempting to scrape magnet link from HTML of ${url}`);
+                const insertHref = (magnetHref, source) => {
+                    torrentLink.after(createMagnetLink(magnetHref));
+                    const elapsed = parseFloat(Math.round((performance.now() - window.start_times[torrentLink]) * 100) / 100).toFixed(2);
+                    log(`successfully scraped magnet link from ${source} of ${url} in ${elapsed} milliseconds`);
+                };
                 const responsePage = createDOM(html);
                 const magnetHrefFromHtml = findMagnetHref(responsePage);
                 if (magnetHrefFromHtml !== null) {
-                    log(`successfully scraped magnet link from HTML of ${url}`);
-                    torrentLink.after(createMagnetLink(magnetHrefFromHtml));
+                    insertHref(magnetHrefFromHtml, 'HTML');
                     return;
                 }
 
@@ -70,8 +74,7 @@
                     const magnetHrefFromWindow = findMagnetHref(responseWindow.document);
                     responseWindow.close();
                     if (magnetHrefFromWindow !== null) {
-                        log(`successfully scraped magnet link from new window of ${url}`);
-                        torrentLink.after(createMagnetLink(magnetHrefFromWindow));
+                        insertHref(magnetHrefFromWindow, 'new window');
                         return;
                     } else {
                         throw new Error((html.indexOf('/threat_defence.php?') !== -1 ? 'host has blocked attempt' : 'failed') + ` to scrape magnet link from ${url}`);
@@ -86,6 +89,9 @@
 
     GM_addStyle('.magnet { margin-left: 3px; }');
 
+    // store start time in order to calculate elapsed time
+    window.start_times = {};
+
     // limit requests to 10 per second
     const rateLimiter = new Bottleneck(1, 100);
 
@@ -96,6 +102,7 @@
     ).forEach(
         l => l.onmouseenter = () => {
             l.onmouseenter = undefined;
+            window.start_times[l] = performance.now();
             rateLimiter.schedule(insertMagnetLink, l);
         }
     );
