@@ -87,6 +87,8 @@
         console.log(...['[' + new Date().toISOString().replace(/T/, ' ').replace(/Z/, '') + ']', ...arguments]);
     }
 
+    log('adding magnet links on hover');
+
     GM_addStyle('.magnet { margin-left: 3px; }');
 
     // store start time in order to calculate elapsed time
