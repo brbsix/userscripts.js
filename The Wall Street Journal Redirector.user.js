@@ -16,7 +16,9 @@
     'use strict';
 
     function getMetaContent (name) {
-        return document.querySelector(`meta[name='${name}']`).content;
+        const metaTag = document.querySelector(`meta[name='${name}']`);
+
+        return metaTag === null ? null : metaTag.content;
     }
 
     function log () {
