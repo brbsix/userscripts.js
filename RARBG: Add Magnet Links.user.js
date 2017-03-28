@@ -16,6 +16,10 @@
 (function () {
     'use strict';
 
+    function createDOM (html) {
+        return new DOMParser().parseFromString(html, 'text/html');
+    }
+
     function createMagnetLink (href) {
         const magnetElement = document.createElement('a');
         magnetElement.className = 'magnet';
@@ -29,13 +33,6 @@
         magnetElement.appendChild(imgElement);
 
         return magnetElement;
-    }
-
-    function createPage (html) {
-        const createdPage = document.createElement('html');
-        createdPage.innerHTML = html;
-
-        return createdPage;
     }
 
     function findMagnetHref (doc) {
@@ -53,7 +50,7 @@
             .then(response => response.text())
             .then(function (html) {
                 log(`attempting to scrape magnet link from HTML of ${url}`);
-                const responsePage = createPage(html);
+                const responsePage = createDOM(html);
                 const magnetHrefFromHtml = findMagnetHref(responsePage);
                 if (magnetHrefFromHtml !== null) {
                     log(`successfully scraped magnet link from HTML of ${url}`);
