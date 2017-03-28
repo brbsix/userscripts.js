@@ -43,7 +43,7 @@
         });
     }
 
-    log('detects paywalled NYT article');
+    log('paywalled New York Times article detected');
 
     const redirectURL = new window.URL((() => {
         if (typeof unsafeWindow.NYTD.success_redirect_url === 'string') {
