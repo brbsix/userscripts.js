@@ -47,7 +47,7 @@
     }
 
     if (getMetaContent('article.template') !== 'full') {
-        log('detects paywalled WSJ article');
+        log('paywalled Wall Street Journal article detected');
         openArchive();
     }
 })();
