@@ -45,7 +45,7 @@
 
     log('detects paywalled NYT article');
 
-    const redirectURL = new window.URL((function () {
+    const redirectURL = new window.URL((() => {
         if (typeof unsafeWindow.NYTD.success_redirect_url === 'string') {
             log('obtaining article URL from unsafeWindow.NYTD.success_redirect_url');
             return unsafeWindow.NYTD.success_redirect_url;

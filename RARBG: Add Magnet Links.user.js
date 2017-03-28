@@ -48,7 +48,7 @@
                 credentials: 'include'
             })
             .then(response => response.text())
-            .then(function (html) {
+            .then(html => {
                 log(`attempting to scrape magnet link from HTML of ${url}`);
                 const responsePage = createDOM(html);
                 const magnetHrefFromHtml = findMagnetHref(responsePage);
