@@ -6,6 +6,7 @@
 // @description  Bypass The New York Times paywall by redirecting to an archive of the page
 // @match        https://myaccount.nytimes.com/auth/login?URI=*
 // @icon         http://www.nytimes.com/favicon.ico
+// @updateURL    https://github.com/brbsix/userscripts.js/raw/master/The%20New%20York%20Times%20Redirector.user.js
 // @connect      archive.is
 // @run-at       document-start
 // @grant        GM_info

@@ -7,6 +7,7 @@
 // @match        http://www.linkedin.com/in/*
 // @match        https://www.linkedin.com/in/*
 // @icon         https://www.linkedin.com/favicon.ico
+// @updateURL    https://github.com/brbsix/userscripts.js/raw/master/LinkedIn%20Signup%20Bypass.user.js
 // @grant        GM_info
 // @grant        GM_log
 // ==/UserScript==
