@@ -42,7 +42,7 @@
                 } else if (response.status === 404) {
                     log('creating snapshot');
                     archiveURL = new window.URL(host);
-                    archiveURL.searchParams.set('run', '1');
+                    archiveURL.searchParams.set('run', 1);
                     archiveURL.searchParams.set('url', url);
                 }
                 window.location.assign(archiveURL.href);
