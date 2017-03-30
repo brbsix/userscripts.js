@@ -6,6 +6,7 @@
 // @description  Bypass the insidious ad technology used by uploadrocket.net
 // @match        http://uploadrocket.net/*
 // @match        http://uploadrocket.net/*
+// @icon         http://uploadrocket.net/favicon.ico
 // @run-at       document-end
 // @grant        GM_addStyle
 // @grant        GM_info

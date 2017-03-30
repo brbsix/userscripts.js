@@ -8,6 +8,7 @@
 // @match        https://uploadrocket.net/*
 // @match        http://api.solvemedia.com/papi/media?*
 // @match        https://api.solvemedia.com/papi/media?*
+// @icon         http://uploadrocket.net/favicon.ico
 // @run-at       document-end
 // @grant        GM_addStyle
 // @grant        GM_info
