@@ -14,10 +14,6 @@
 (function () {
     'use strict';
 
-    function log () {
-        GM_log(...[arguments.length ? GM_info.script.name + ':' : GM_info.script.name, ...arguments]);
-    }
-
     // add or update existing text node after link
     function addKarma(afterLink, karma) {
         const nextSibling = afterLink.nextSibling;
@@ -33,6 +29,10 @@
         // now update it
         afterLink.nextSibling.textContent = ` (karma: ${karma}) `;
         log(afterLink.nextSibling);
+    }
+
+    function log () {
+        GM_log(...[arguments.length ? GM_info.script.name + ':' : GM_info.script.name, ...arguments]);
     }
 
     function showKarma (link) {
