@@ -47,18 +47,24 @@
 
     log('New York Times paywall detected');
 
-    const redirectURL = new window.URL((() => {
-        if (typeof unsafeWindow.NYTD.success_redirect_url === 'string') {
-            log('obtaining article URL from unsafeWindow.NYTD.success_redirect_url');
-            return unsafeWindow.NYTD.success_redirect_url;
-        } else {
-            log('manually obtaining article URL by parsing this page\'s search parameters');
-            return new window.URL(window.location).searchParams.get('URI');
-        }
+    openArchive((() => {
+        const dirtyURL = new window.URL((() => {
+            // NYTD will most likely not be ready by the time this script
+            // executes, in which case we don't want to wait around for it
+            // and can instead parse the redirect URL out of the search
+            // parameters of the current page
+            if (typeof unsafeWindow.NYTD !== 'undefined' && typeof unsafeWindow.NYTD.success_redirect_url === 'string') {
+                log('obtaining article URL from NYTD.success_redirect_url');
+                return unsafeWindow.NYTD.success_redirect_url;
+            } else {
+                log('manually obtaining article URL by parsing this page\'s search parameters');
+                return new window.URL(window.location).searchParams.get('URI');
+            }
+        })());
+
+        // strip parameters
+        dirtyURL.search = '';
+
+        return dirtyURL.href;
     })());
-
-    // strip away problematic parameters
-    redirectURL.search = '';
-
-    openArchive(redirectURL.href);
 })();
