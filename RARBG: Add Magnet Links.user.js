@@ -9,6 +9,7 @@
 // @match        https://rarbg.to/torrents.php?search=*
 // @icon         http://www.rarbg.to/favicon.ico
 // @require      https://raw.githubusercontent.com/SGrondin/bottleneck/master/bottleneck.min.js
+// @updateURL    https://github.com/brbsix/userscripts.js/raw/master/RARBG:%20Add%20Magnet%20Links.user.js
 // @run-at       document-end
 // @grant        GM_addStyle
 // ==/UserScript==

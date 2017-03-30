@@ -9,6 +9,7 @@
 // @match        http://api.solvemedia.com/papi/media?*
 // @match        https://api.solvemedia.com/papi/media?*
 // @icon         http://uploadrocket.net/favicon.ico
+// @updateURL    https://github.com/brbsix/userscripts.js/raw/master/uploadrocket.net%20-%20Ad%20bypass.user.js
 // @run-at       document-end
 // @grant        GM_addStyle
 // @grant        GM_info
