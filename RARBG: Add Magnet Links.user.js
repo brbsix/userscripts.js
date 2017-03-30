@@ -5,8 +5,8 @@
 // @version      0.1
 // @author       Brian Beffa <brbsix@gmail.com>
 // @description  Add small magnet links to search results
-// @match        http://rarbg.to/torrents.php?search=*
-// @match        https://rarbg.to/torrents.php?search=*
+// @match        http://rarbg.to/*
+// @match        https://rarbg.to/*
 // @icon         http://www.rarbg.to/favicon.ico
 // @require      https://raw.githubusercontent.com/SGrondin/bottleneck/master/bottleneck.min.js
 // @updateURL    https://github.com/brbsix/userscripts.js/raw/master/RARBG:%20Add%20Magnet%20Links.user.js
@@ -86,6 +86,11 @@
 
     function log () {
         console.log(...['[' + new Date().toISOString().replace(/T/, ' ').replace(/Z/, '') + ']', ...arguments]);
+    }
+
+    // only continue if page has torrent links that we're interested in
+    if (document.getElementsByClassName('lista2t').length === 0) {
+        return;
     }
 
     log('adding magnet links on hover');
