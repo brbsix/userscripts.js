@@ -6,6 +6,7 @@
 // @description  Bypass signup-related crud on LinkedIn profile pages
 // @match        http://www.linkedin.com/in/*
 // @match        https://www.linkedin.com/in/*
+// @icon         https://www.linkedin.com/favicon.ico
 // @grant        GM_info
 // @grant        GM_log
 // ==/UserScript==

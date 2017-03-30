@@ -5,6 +5,7 @@
 // @author       Brian Beffa <brbsix@gmail.com>
 // @description  Hover over a commenter's username to view their karma
 // @match        https://news.ycombinator.com/item?id=*
+// @icon         https://news.ycombinator.com/favicon.ico
 // @grant        GM_info
 // @grant        GM_log
 // ==/UserScript==
