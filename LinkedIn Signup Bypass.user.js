@@ -15,10 +15,6 @@
 (function () {
     'use strict';
 
-    function log () {
-        GM_log(...[arguments.length ? GM_info.script.name + ':' : GM_info.script.name, ...arguments]);
-    }
-
     function removeNodes (selector) {
         document.querySelectorAll(selector).forEach(
             function (e) {
@@ -27,7 +23,7 @@
         );
     }
 
-    log();
+    GM_log(GM_info.script.name);
 
     // hide signup overlay
     removeNodes('#advocate-modal');
