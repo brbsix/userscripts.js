@@ -17,9 +17,7 @@
 
     function removeNodes (selector) {
         document.querySelectorAll(selector).forEach(
-            function (e) {
-                e.parentNode.removeChild(e);
-            }
+            e => e.parentNode.removeChild(e)
         );
     }
 
