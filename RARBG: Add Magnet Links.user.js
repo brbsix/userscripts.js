@@ -78,6 +78,12 @@
                         insertHref(magnetHrefFromWindow, 'new window');
                         return;
                     } else {
+                        // If RARBG detects abnormal activity from your IP, they may
+                        // temporarily block you (from automated requests at least)
+                        // by serving you their "Threat Defense" page. Here, we
+                        // differentiate between being unable to find the magnet link
+                        // because the request was blocked and being unable to find it
+                        // for any other reason (e.g. it was simply not on the page).
                         throw new Error((html.indexOf('/threat_defence.php?') !== -1 ? 'host has blocked attempt' : 'failed') + ` to scrape magnet link from ${url}`);
                     }
                 };
