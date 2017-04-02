@@ -25,22 +25,30 @@
     function openArchive (url = window.location.href) {
         const host = 'https://archive.is';
 
+        const createArchiveLink = (action, searchParams) => {
+            const newURL = new URL(action === undefined ? '' : [action, url].join('/'), host);
+            if (typeof searchParams !== undefined) {
+                newURL.search = new URLSearchParams(searchParams).toString();
+            }
+            return newURL.href;
+        };
+
         GM_xmlhttpRequest({
             method: 'GET',
-            url: new window.URL(['timemap', url].join('/'), host).href,
+            url: createArchiveLink('timemap'),
             onload: function (response) {
-                let archiveURL;
                 log(`opening archive of ${url}`);
-                if (response.status === 200) {
-                    log('opening existing snapshot');
-                    archiveURL = new window.URL(['timegate', url].join('/'), host);
-                } else if (response.status === 404) {
-                    log('creating snapshot');
-                    archiveURL = new window.URL(host);
-                    archiveURL.searchParams.set('run', '1');
-                    archiveURL.searchParams.set('url', url);
-                }
-                window.location.assign(archiveURL.href);
+                window.location.assign((() => {
+                    if (response.status === 200) {
+                        log('opening existing snapshot');
+                        return createArchiveLink('timegate');
+                    } else if (response.status === 404) {
+                        log('creating snapshot');
+                        return createArchiveLink(undefined, [['run', 1], ['url', url]]);
+                    } else {
+                        throw new Error('unknown response from host');
+                    }
+                })());
             }
         });
     }

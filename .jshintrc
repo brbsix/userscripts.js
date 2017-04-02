@@ -24,13 +24,14 @@
     "browser": true,
     "devel": true,
 
-    // Greasemonkey globals
+    // Greasemonkey & Chrome globals
     "globals": {
         "GM_addStyle": true,
         "GM_info": true,
         "GM_log": true,
         "GM_setClipboard": true,
         "GM_xmlhttpRequest": true,
-        "unsafeWindow": true
+        "unsafeWindow": true,
+        "URLSearchParams": true
     }
 }
