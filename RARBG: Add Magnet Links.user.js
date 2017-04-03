@@ -1,4 +1,4 @@
-/* global Bottleneck, nd, overlib */
+/* global nd, overlib, pThrottle */
 // ==UserScript==
 // @name         RARBG: Add Magnet Links
 // @namespace    https://brbsix.github.io/
@@ -8,7 +8,7 @@
 // @match        http://rarbg.to/*
 // @match        https://rarbg.to/*
 // @icon         http://www.rarbg.to/favicon.ico
-// @require      https://raw.githubusercontent.com/SGrondin/bottleneck/master/bottleneck.min.js#sha512=7f7dabb273e521f495e67e506683697604cccc8cb50f5ae3a7f302eb3cbdbb571637bf8cbc73eab6bf6ba907026ae2e732ee823d9ea677b0826b202b51434272
+// @require      https://wzrd.in/standalone/p-throttle@1.1.0#sha512=3bc47fba0343d176e944608dbb316608d1a0c08edeec1ba412e3ad2e6467aee521d3cc5baa5bbe6635b021253fa32926b6bb8be684473a40ca7c280ddd8673cb
 // @updateURL    https://github.com/brbsix/userscripts.js/raw/master/RARBG:%20Add%20Magnet%20Links.user.js
 // @run-at       document-end
 // @grant        GM_addStyle
@@ -127,7 +127,7 @@
     window.start_times = {};
 
     // limit requests to 10 per second
-    const rateLimiter = new Bottleneck(1, 100);
+    const rateLimiter = pThrottle(processMagnetLink, 10, 1000);
 
     Array.from(
         document.querySelectorAll('a[href^="/torrent/"]')
@@ -148,7 +148,7 @@
             }
 
             window.start_times[l] = performance.now();
-            rateLimiter.schedule(processMagnetLink, l);
+            rateLimiter(l);
         }
     );
 
