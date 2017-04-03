@@ -30,6 +30,7 @@
         "GM_getValue": true,
         "GM_info": true,
         "GM_log": true,
+        "GM_notification": true,
         "GM_setClipboard": true,
         "GM_setValue": true,
         "GM_xmlhttpRequest": true,
