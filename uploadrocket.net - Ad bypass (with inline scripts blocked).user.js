@@ -184,7 +184,7 @@
                     GM_notification(
                         'Direct download link in clipboard',
                         directHref.split('/').pop().split('#')[0].split('?')[0],
-                        'http://uploadrocket.net/favicon.ico'
+                        GM_info.script.icon
                     );
                 }
             }
