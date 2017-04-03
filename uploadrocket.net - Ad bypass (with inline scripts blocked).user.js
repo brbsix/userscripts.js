@@ -26,6 +26,7 @@
         clipboard: true,
         cookie: true,
         iframe: true,
+        notification: true,
         overlay: true,
         page1: true,
         page2: true,
@@ -180,11 +181,13 @@
                 const directHref = directLink.href;
                 log('copying direct download link to clipboard');
                 GM_setClipboard(directHref);
-                GM_notification(
-                    'Direct download link in clipboard',
-                    directHref.split('/').pop().split('#')[0].split('?')[0],
-                    'http://uploadrocket.net/favicon.ico'
-                );
+                if (options.notification) {
+                    GM_notification(
+                        'Direct download link in clipboard',
+                        directHref.split('/').pop().split('#')[0].split('?')[0],
+                        'http://uploadrocket.net/favicon.ico'
+                    );
+                }
             }
 
             return;
