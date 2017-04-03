@@ -7,7 +7,6 @@
 // @match        https://news.ycombinator.com/item?id=*
 // @icon         https://news.ycombinator.com/favicon.ico
 // @updateURL    https://github.com/brbsix/userscripts.js/raw/master/Hacker%20News%20-%20show%20karma%20on%20hover.user.js
-// @grant        GM_info
 // @grant        GM_log
 // ==/UserScript==
 

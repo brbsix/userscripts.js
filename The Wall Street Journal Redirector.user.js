@@ -9,7 +9,6 @@
 // @icon         http://online.wsj.com/favicon.ico
 // @updateURL    https://github.com/brbsix/userscripts.js/raw/master/The%20Wall%20Street%20Journal%20Redirector.user.js
 // @connect      archive.is
-// @grant        GM_info
 // @grant        GM_log
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==

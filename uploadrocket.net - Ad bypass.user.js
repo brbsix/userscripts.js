@@ -10,7 +10,6 @@
 // @updateURL    https://github.com/brbsix/userscripts.js/raw/master/uploadrocket.net%20-%20Ad%20bypass%20(with%20inline%20scripts%20blocked).user.js
 // @run-at       document-end
 // @grant        GM_addStyle
-// @grant        GM_info
 // @grant        GM_log
 // @grant        GM_setClipboard
 // @grant        GM_unsafeWindow

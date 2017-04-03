@@ -9,7 +9,6 @@
 // @updateURL    https://github.com/brbsix/userscripts.js/raw/master/The%20New%20York%20Times%20Redirector.user.js
 // @connect      archive.is
 // @run-at       document-start
-// @grant        GM_info
 // @grant        GM_log
 // @grant        GM_unsafeWindow
 // @grant        GM_xmlhttpRequest
