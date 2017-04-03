@@ -111,6 +111,7 @@
 
     // only continue if page has torrent links that we're interested in
     if (document.getElementsByClassName('lista2t').length === 0) {
+        log('no torrent links on this page');
         return;
     }
 
