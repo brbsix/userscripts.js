@@ -146,10 +146,12 @@
             log('removing premium download button on download page');
             premiumBtn.parentElement.parentElement.style.display = 'none';
 
-            const spacerElement = document.querySelector('td[style="width:5%;"]');
+            const spacerElement = document.querySelector('tr:nth-child(4) > td[style="width:5%;"]');
             if (spacerElement !== null) {
-                log('removing spacer element on download page');
-                spacerElement.style.display = 'none';
+                log('inserting spacer element on download page');
+                const newSpacerElement = document.createElement('td');
+                newSpacerElement.style.width = '5%';
+                spacerElement.nextElementSibling.after(newSpacerElement);
             }
         }
 
