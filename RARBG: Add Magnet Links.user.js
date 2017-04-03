@@ -29,7 +29,7 @@
         magnetElement.onmouseout = () => nd();
 
         const imgElement = document.createElement('img');
-        imgElement.src = 'data:image/png;base64,R0lGODlhDAAMALMPAOXl5ewvErW1tebm5oocDkVFRePj47a2ts0WAOTk5MwVAIkcDesuEs0VAEZGRv///yH5BAEAAA8ALAAAAAAMAAwAAARB8MnnqpuzroZYzQvSNMroUeFIjornbK1mVkRzUgQSyPfbFi/dBRdzCAyJoTFhcBQOiYHyAABUDsiCxAFNWj6UbwQAOw==';
+        imgElement.src = '//dyncdn.me/static/20/img/magnet.gif';
 
         magnetElement.appendChild(imgElement);
 
