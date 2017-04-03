@@ -23,15 +23,14 @@
 
     function createMagnetLink (href) {
         const magnetElement = document.createElement('a');
-        magnetElement.className = 'magnet';
         magnetElement.href = href;
         magnetElement.onmouseover = () => overlib('Magnet link.');
         magnetElement.onmouseout = () => nd();
 
-        const imgElement = document.createElement('img');
-        imgElement.src = '//dyncdn.me/static/20/img/magnet.gif';
+        const iconElement = document.createElement('i');
+        iconElement.className = 'mgicon';
 
-        magnetElement.appendChild(imgElement);
+        magnetElement.appendChild(iconElement);
 
         return magnetElement;
     }
@@ -101,7 +100,13 @@
 
     log('adding magnet links on hover');
 
-    GM_addStyle('.magnet { margin-left: 3px; }');
+    GM_addStyle('.mgicon {' +
+                '  background-image: url("https://dyncdn.me/static/20/img/magnet.gif");' +
+                '  display: inline-block;' +
+                '  height: 12px;' +
+                '  width: 12px;' +
+                '  margin-left: 3px;' +
+                '}');
 
     // store start time in order to calculate elapsed time
     window.start_times = {};
