@@ -54,12 +54,6 @@
         return;
     }
 
-    // configure Solve Media captcha
-    unsafeWindow.ACPuzzleOptions = {
-        theme: 'white',
-        size: ''
-    };
-
     // set cookie sessionID (normally set in an inline script) in order to
     // disable anti-ablock tech (e.g. countdown and slow download speeds)
     const inlineScripts = document.querySelectorAll('script:not([src])');
@@ -93,6 +87,11 @@
     // assist with captcha (2nd page)
     const captchaBtn = document.querySelector('input[type="submit"][id="btn_download"][value="Create link from captcha code"]');
     if (captchaBtn !== null) {
+        // configure Solve Media captcha
+        unsafeWindow.ACPuzzleOptions = {
+            theme: 'white',
+            size: ''
+        };
 
         const premiumJunk = document.querySelector('div[style="z-index:2001;position:relative;font-size: 24px;"]');
         if (premiumJunk !== null) {
