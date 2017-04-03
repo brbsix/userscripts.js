@@ -44,6 +44,7 @@
     function insertMagnetLink (torrentLink) {
         const url = torrentLink.href;
 
+        log(`fetching ${url}`);
         return fetch(url, {
                 credentials: 'include'
             })
