@@ -12,10 +12,16 @@
 // @updateURL    https://github.com/brbsix/userscripts.js/raw/master/RARBG:%20Add%20Magnet%20Links.user.js
 // @run-at       document-end
 // @grant        GM_addStyle
+// @grant        GM_getValue
+// @grant        GM_setValue
 // ==/UserScript==
 
 (function () {
     'use strict';
+
+    const options = {
+        cache: true
+    };
 
     function createDOM (html) {
         return new DOMParser().parseFromString(html, 'text/html');
@@ -41,7 +47,11 @@
         return magnetElementFound === null ? null : magnetElementFound.href;
     }
 
-    function insertMagnetLink (torrentLink) {
+    function insertMagnetLink (torrentLink, magnetHref) {
+        torrentLink.after(createMagnetLink(magnetHref));
+    }
+
+    function processMagnetLink (torrentLink) {
         const url = torrentLink.href;
 
         log(`fetching ${url}`);
@@ -52,7 +62,11 @@
             .then(html => {
                 log(`attempting to scrape magnet link from HTML of ${url}`);
                 const insertHref = (magnetHref, source) => {
-                    torrentLink.after(createMagnetLink(magnetHref));
+                    if (options.cache) {
+                        log(`storing magnet link of ${url} in cache`);
+                        GM_setValue(url, magnetHref);
+                    }
+                    insertMagnetLink(torrentLink, magnetHref);
                     const elapsed = parseFloat(Math.round((performance.now() - window.start_times[torrentLink]) * 100) / 100).toFixed(2);
                     log(`successfully scraped magnet link from ${source} of ${url} in ${elapsed} milliseconds`);
                 };
@@ -122,8 +136,19 @@
     ).forEach(
         l => l.onmouseenter = () => {
             l.onmouseenter = undefined;
+
+            if (options.cache) {
+                const url = l.href;
+                const magnetHref = GM_getValue(url);
+                if (typeof magnetHref !== 'undefined') {
+                    log(`retrieved magnet link of ${url} from cache`);
+                    insertMagnetLink(l, magnetHref);
+                    return;
+                }
+            }
+
             window.start_times[l] = performance.now();
-            rateLimiter.schedule(insertMagnetLink, l);
+            rateLimiter.schedule(processMagnetLink, l);
         }
     );
 

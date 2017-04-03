@@ -27,9 +27,11 @@
     // Greasemonkey & Chrome globals
     "globals": {
         "GM_addStyle": true,
+        "GM_getValue": true,
         "GM_info": true,
         "GM_log": true,
         "GM_setClipboard": true,
+        "GM_setValue": true,
         "GM_xmlhttpRequest": true,
         "unsafeWindow": true,
         "URLSearchParams": true
