@@ -20,7 +20,8 @@
     'use strict';
 
     const options = {
-        cache: true
+        cache: true,
+        hover: true
     };
 
     function createDOM (html) {
@@ -113,7 +114,7 @@
         return;
     }
 
-    log('adding magnet links on hover');
+    log('adding magnet links', `${options.hover ? 'on hover' : ''}`);
 
     GM_addStyle('.mgicon {' +
                 '  background-image: url("https://dyncdn.me/static/20/img/magnet.gif");' +
@@ -134,21 +135,30 @@
     ).filter(
         l => l.text !== '' && l.href.indexOf('#') === -1
     ).forEach(
-        l => l.onmouseenter = () => {
-            l.onmouseenter = undefined;
-
-            if (options.cache) {
-                const url = l.href;
-                const magnetHref = GM_getValue(url);
-                if (typeof magnetHref !== 'undefined') {
-                    log(`retrieved magnet link of ${url} from cache`);
-                    insertMagnetLink(l, magnetHref);
-                    return;
+        l => {
+            const run = () => {
+                if (options.cache) {
+                    const url = l.href;
+                    const magnetHref = GM_getValue(url);
+                    if (typeof magnetHref !== 'undefined') {
+                        log(`retrieved magnet link of ${url} from cache`);
+                        insertMagnetLink(l, magnetHref);
+                        return;
+                    }
                 }
-            }
 
-            window.start_times[l] = performance.now();
-            rateLimiter(l);
+                window.start_times[l] = performance.now();
+                rateLimiter(l);
+            };
+
+            if (options.hover) {
+                l.onmouseenter = () => {
+                    l.onmouseenter = undefined;
+                    run();
+                };
+            } else {
+                run();
+            }
         }
     );
 
