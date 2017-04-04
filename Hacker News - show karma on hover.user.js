@@ -54,6 +54,8 @@
         };
     }
 
+    log('setting up karma on hover');
+
     Array.from(
         document.getElementsByClassName('hnuser')
     ).forEach(
