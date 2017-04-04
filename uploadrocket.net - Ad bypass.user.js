@@ -33,7 +33,7 @@
             set: function(value) {
                 if (typeof value === 'function') {
                     log('something attempted to set window.admvpu to a function');
-                    throw Error();
+                    throw new Error();
                 } else {
                     log('something attempted to set window.admvpu to something other than a function');
                 }
@@ -45,7 +45,7 @@
             },
             set: function() {
                 log('something attempted to set window.Fingerprint2');
-                throw Error();
+                throw new Error();
             }
         }
     });

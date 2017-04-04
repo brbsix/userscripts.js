@@ -27,13 +27,13 @@
         ]).get(window.location.host);
 
         if (typeof btnSelector === 'undefined') {
-            throw Error(`No selector for "${btnName}" button on the current host`);
+            throw new Error(`No selector for "${btnName}" button on the current host`);
         }
 
         const btn = document.querySelector(btnSelector);
 
         if (typeof btn === null) {
-            throw Error(`"${btnName}" button was not found`);
+            throw new Error(`"${btnName}" button was not found`);
         }
 
         log(`clicking "${btnName}" button`);
