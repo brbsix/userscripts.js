@@ -6,6 +6,7 @@
 // @description  Bypass ad overlays found on some mature video hosts
 // @match        http://www.gameofporn.net/video/*
 // @match        http://www.hclips.com/videos/*
+// @match        http://www.yeptube.com/video/*
 // @match        https://www.ceporn.net/video/*
 // @updateURL    https://github.com/brbsix/userscripts.js/raw/master/Ad%20Overlay%20Bypass.user.js
 // @grant        GM_log
@@ -23,7 +24,8 @@
         const btnSelector = new Map([
             ['www.ceporn.net', '#vad > div:nth-child(2) > div:nth-child(2)'],
             ['www.hclips.com', '.pl_adv1_c.ind_close'],
-            ['www.gameofporn.net', '.video-banner-close-play']
+            ['www.gameofporn.net', '.video-banner-close-play'],
+            ['www.yeptube.com', '.drt-spot-close-play']
         ]).get(window.location.host);
 
         if (typeof btnSelector === 'undefined') {
