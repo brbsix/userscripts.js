@@ -25,6 +25,7 @@
         clipboard: true,
         cookie: true,
         iframe: true,
+        inline: true,
         notification: true,
         overlay: true,
         page1: true,
@@ -34,6 +35,24 @@
 
     function log () {
         GM_log(...[arguments.length ? GM_info.script.name + ':' : GM_info.script.name, ...arguments]);
+    }
+
+    // verify that inline scripts are disabled
+    if (options.inline) {
+        unsafeWindow.TM_inlineScripts = false;
+
+        const newScript = document.createElement('script');
+        newScript.type = 'text/javascript';
+        newScript.textContent = 'TM_inlineScripts = true';
+        document.head.appendChild(newScript);
+        newScript.remove();
+
+        if (unsafeWindow.TM_inlineScripts) {
+            log('inline scripts do not appear to be disabled');
+            log('please disable inline scripts on this page');
+        } else {
+            log('inline scripts appear to be disabled');
+        }
     }
 
     // assist with captcha loaded in iframe
