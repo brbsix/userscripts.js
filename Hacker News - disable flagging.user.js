@@ -3,7 +3,7 @@
 // @namespace    https://brbsix.github.io/
 // @version      0.1
 // @author       Brian Beffa <brbsix@gmail.com>
-// @description  Require double click to re-enable flag link
+// @description  Double-click to re-enable
 // @match        https://news.ycombinator.com/*
 // @icon         https://news.ycombinator.com/favicon.ico
 // @updateURL    https://github.com/brbsix/userscripts.js/raw/master/Hacker%20News%20-%20disable%20flagging.user.js
