@@ -41,6 +41,7 @@
         GM_xmlhttpRequest({
             method: 'GET',
             url: createArchiveLink('timemap'),
+            anonymous: true,
             onload: function (response) {
                 log(`opening archive of ${url}`);
                 window.location.assign((() => {
