@@ -91,17 +91,19 @@
         // disable anti-ablock tech (e.g. countdown and slow download speeds)
         // document.cookie = 'sessionID=a16516d61561d6511;domain=.uploadrocket.net;';
 
-        const inlineScripts = document.querySelectorAll('script:not([src])');
-        Array.from(inlineScripts).find(function (node) {
-            const script = node.innerHTML;
-            const matches = RegExp(' // NOd\n\\s*document\.cookie = "([^"]+)"').exec(script);
-            if (matches !== null && matches.length === 2) {
-                const cookie = matches[1];
-                log(`setting document.cookie to '${cookie}'`);
-                document.cookie = cookie;
-                return true;
+        Array.from(
+            document.querySelectorAll('script:not([src])')
+        ).find(
+            (e) => {
+                const matches = RegExp(' // NOd\n\\s*document\.cookie = "([^"]+)"').exec(e.innerHTML);
+                if (matches !== null && matches.length === 2) {
+                    const cookie = matches[1];
+                    log(`setting document.cookie to '${cookie}'`);
+                    document.cookie = cookie;
+                    return true;
+                }
             }
-        });
+        );
     }
 
     // hide glasstop overlay (normally performed by breakglass() upon click)
