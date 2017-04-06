@@ -18,8 +18,8 @@
         const del = document.createElement('del');
         del.textContent = element.textContent;
 
-        // neuter link
-        element.removeAttribute('href');
+        // rather than deletion, href is set to '#' in order to maintain tab index
+        element.href = '#';
         element.textContent = '';
 
         // preserve <a> tag by appending <del> tag as a child
