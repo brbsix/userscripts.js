@@ -14,8 +14,16 @@
     'use strict';
 
     function disableLink (element) {
+        // use <del> tag to indicate deleted text
+        const del = document.createElement('del');
+        del.textContent = element.textContent;
+
+        // neuter link
         element.removeAttribute('href');
-        element.innerHTML = `<del>${element.textContent}</del>`;
+        element.textContent = '';
+
+        // preserve <a> tag by appending <del> tag as a child
+        element.appendChild(del);
     }
 
     function enableLink (element, outerHTML) {
