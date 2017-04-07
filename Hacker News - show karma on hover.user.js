@@ -54,6 +54,11 @@
         };
     }
 
+    if (new URL(window.location).pathname === '/user') {
+        log('no need to show karma on a user page');
+        return;
+    }
+
     log('setting up karma on hover');
 
     Array.from(
