@@ -28,9 +28,9 @@
         const dateElement = Array.from(
             document.querySelectorAll('td[valign="top"]')
         ).filter(
-            (e) => e.textContent === 'created:'
+            e => e.textContent === 'created:'
         ).map(
-            (e) => e.nextElementSibling
+            e => e.nextElementSibling
         ).pop();
         if (typeof dateElement === 'undefined') {
             throw new Error(`unable to find 'created:' element`);
@@ -46,7 +46,7 @@
         Array.from(
             document.querySelectorAll('.age a')
         ).forEach(
-            (dateElement) => {
+            dateElement => {
                 const ago = dateElement.textContent;
                 const match = ago.match(/^(\d+) (\w+) ago$/);
                 if (match !== null) {
