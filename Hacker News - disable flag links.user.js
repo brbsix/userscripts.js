@@ -6,7 +6,7 @@
 // @description  Double-click to re-enable
 // @match        https://news.ycombinator.com/*
 // @icon         https://news.ycombinator.com/favicon.ico
-// @updateURL    https://github.com/brbsix/userscripts.js/raw/master/Hacker%20News%20-%20disable%20flagging.user.js
+// @updateURL    https://github.com/brbsix/userscripts.js/raw/master/Hacker%20News%20-%20disable%20flag%20links.user.js
 // @grant        GM_log
 // ==/UserScript==
 
