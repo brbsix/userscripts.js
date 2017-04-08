@@ -43,20 +43,17 @@
             dateElement.title = dateString;
         });
     } else {
-        Array.from(
-            document.querySelectorAll('.age a')
-        ).forEach(
-            dateElement => {
-                const ago = dateElement.textContent;
-                const match = ago.match(/^(\d+) (\w+) ago$/);
-                if (match !== null) {
-                    const timeDelta = match[1];
-                    const timeUnit = match[2];
-                    const dateString = moment().subtract(timeDelta, timeUnit).format('LL');
-                    dateElement.title = dateString;
-                }
+        const dateElements = document.querySelectorAll('.age a');
+        for (const dateElement of dateElements) {
+            const ago = dateElement.textContent;
+            const match = ago.match(/^(\d+) (\w+) ago$/);
+            if (match !== null) {
+                const timeDelta = match[1];
+                const timeUnit = match[2];
+                const dateString = moment().subtract(timeDelta, timeUnit).format('LL');
+                dateElement.title = dateString;
             }
-        );
+        }
     }
 
 })();
