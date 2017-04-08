@@ -52,7 +52,7 @@
                 if (match !== null) {
                     const timeDelta = match[1];
                     const timeUnit = match[2];
-                    const dateString = moment().subtract(timeUnit, timeDelta).format('LL');
+                    const dateString = moment().subtract(timeDelta, timeUnit).format('LL');
                     dateElement.title = dateString;
                 }
             }
