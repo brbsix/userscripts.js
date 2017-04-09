@@ -27,9 +27,6 @@
     }
 
     function enableLink (element, outerHTML) {
-        // prevent this function from being run again
-        element.ondblclick = null;
-
         element.outerHTML = outerHTML;
         log('enabled element');
     }
@@ -46,7 +43,9 @@
         l => {
             const outerHTML = l.outerHTML;
             disableLink(l);
-            l.ondblclick = () => enableLink(l, outerHTML);
+            l.addEventListener('dblclick', () => enableLink(l, outerHTML), {
+                once: true
+            });
         }
     );
 
