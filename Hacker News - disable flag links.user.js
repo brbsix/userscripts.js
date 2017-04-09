@@ -27,6 +27,9 @@
     }
 
     function enableLink (element, outerHTML) {
+        // prevent this function from being run again
+        element.ondblclick = null;
+
         element.outerHTML = outerHTML;
         log('enabled element');
     }
