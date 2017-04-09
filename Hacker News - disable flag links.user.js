@@ -35,18 +35,20 @@
         GM_log(...[arguments.length ? GM_info.script.name + ':' : GM_info.script.name, ...arguments]);
     }
 
+    function setupLink (element) {
+        const outerHTML = element.outerHTML;
+        disableLink(element);
+        element.addEventListener('dblclick', () => enableLink(element, outerHTML), {
+            once: true
+        });
+    }
+
     log('configuring flag links');
 
     Array.from(
         document.querySelectorAll('a[href^="flag?"]')
     ).forEach(
-        l => {
-            const outerHTML = l.outerHTML;
-            disableLink(l);
-            l.addEventListener('dblclick', () => enableLink(l, outerHTML), {
-                once: true
-            });
-        }
+        setupLink
     );
 
 })();
