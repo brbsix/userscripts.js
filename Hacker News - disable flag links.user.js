@@ -18,7 +18,7 @@
         const del = document.createElement('del');
         del.textContent = element.textContent;
 
-        // rather than deletion, href is set to '#' in order to maintain tab index
+        // rather than delete it, set href to '#' in order to preserve tab index
         element.href = '#';
         element.textContent = '';
 
