@@ -13,7 +13,7 @@
 (function () {
     'use strict';
 
-    function disableLink (element) {
+    function protectLink (element) {
         // use <del> tag to indicate deleted text
         const del = document.createElement('del');
         del.textContent = element.textContent;
@@ -26,9 +26,9 @@
         element.appendChild(del);
     }
 
-    function enableLink (element, outerHTML) {
+    function restoreLink (element, outerHTML) {
         element.outerHTML = outerHTML;
-        log('enabled element');
+        log('restored element');
     }
 
     function log () {
@@ -37,8 +37,8 @@
 
     function setupLink (element) {
         const outerHTML = element.outerHTML;
-        disableLink(element);
-        element.addEventListener('dblclick', () => enableLink(element, outerHTML), {
+        protectLink(element);
+        element.addEventListener('dblclick', () => restoreLink(element, outerHTML), {
             once: true
         });
     }
