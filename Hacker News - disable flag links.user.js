@@ -14,6 +14,8 @@
     'use strict';
 
     function protectLink (element) {
+        const outerHTML = element.outerHTML;
+
         // use <del> tag to indicate deleted text
         const del = document.createElement('del');
         del.textContent = element.textContent;
@@ -24,6 +26,10 @@
 
         // preserve <a> tag by appending <del> tag as a child
         element.appendChild(del);
+
+        element.addEventListener('dblclick', () => restoreLink(element, outerHTML), {
+            once: true
+        });
     }
 
     function restoreLink (element, outerHTML) {
@@ -35,14 +41,6 @@
         GM_log(...[arguments.length ? GM_info.script.name + ':' : GM_info.script.name, ...arguments]);
     }
 
-    function setupLink (element) {
-        const outerHTML = element.outerHTML;
-        protectLink(element);
-        element.addEventListener('dblclick', () => restoreLink(element, outerHTML), {
-            once: true
-        });
-    }
-
     log('configuring flag links');
 
     Array.from(
@@ -51,7 +49,7 @@
         // don't disable "unflag" links
         a => a.textContent === 'flag'
     ).forEach(
-        setupLink
+        protectLink
     );
 
 })();
