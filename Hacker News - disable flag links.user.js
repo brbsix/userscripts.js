@@ -47,6 +47,9 @@
 
     Array.from(
         document.querySelectorAll('a[href^="flag?"]')
+    ).filter(
+        // don't disable "unflag" links
+        a => a.textContent === 'flag'
     ).forEach(
         setupLink
     );
