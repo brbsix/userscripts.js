@@ -14,26 +14,29 @@
     'use strict';
 
     function protectLink (element) {
-        const outerHTML = element.outerHTML;
+        // create placeholder (with href set to '#' in order to preserve tab index)
+        const dummyElement = document.createElement('a');
+        dummyElement.href = '#';
 
         // use <del> tag to indicate deleted text
         const del = document.createElement('del');
         del.textContent = element.textContent;
 
-        // rather than delete it, set href to '#' in order to preserve tab index
-        element.href = '#';
-        element.textContent = '';
-
         // preserve <a> tag by appending <del> tag as a child
-        element.appendChild(del);
+        dummyElement.appendChild(del);
 
-        element.addEventListener('dblclick', () => restoreLink(element, outerHTML), {
+        // swap the old link for the new one
+        element.parentNode.insertBefore(dummyElement, element);
+        element.parentNode.removeChild(element);
+
+        dummyElement.addEventListener('dblclick', () => restoreLink(dummyElement, element), {
             once: true
         });
     }
 
-    function restoreLink (element, outerHTML) {
-        element.outerHTML = outerHTML;
+    function restoreLink (dummyElement, realElement) {
+        dummyElement.parentNode.insertBefore(realElement, dummyElement);
+        dummyElement.parentNode.removeChild(dummyElement);
         log('restored element');
     }
 
