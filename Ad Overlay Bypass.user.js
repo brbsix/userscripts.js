@@ -34,7 +34,7 @@
 
         const btn = document.querySelector(btnSelector);
 
-        if (typeof btn === null) {
+        if (btn === null) {
             throw new Error(`"${btnName}" button was not found`);
         }
 
