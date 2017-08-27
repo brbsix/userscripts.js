@@ -94,7 +94,7 @@
         Array.from(
             document.querySelectorAll('script:not([src])')
         ).find(
-            (e) => {
+            e => {
                 const matches = RegExp(' // NOd\n\\s*document\.cookie = "([^"]+)"').exec(e.innerHTML);
                 if (matches !== null && matches.length === 2) {
                     const cookie = matches[1];
