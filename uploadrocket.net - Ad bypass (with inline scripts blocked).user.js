@@ -54,6 +54,16 @@
         }
     }
 
+    // hide Google ads
+    log('hiding Google ads');
+    Array.from(
+        document.querySelectorAll('.adsbygoogle')
+    ).forEach(
+        e => {
+            e.style.display = 'none';
+        }
+    );
+
     // assist with captcha loaded in iframe
     if (options.iframe) {
         if (window.self === window.top) {
