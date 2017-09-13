@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         uploadrocket.net - Ad bypass
+// @name         uploadrocket.net - Ad bypass (with inline scripts blocked)
 // @namespace    https://brbsix.github.io/
 // @version      0.1
 // @author       Brian Beffa <brbsix@gmail.com>
