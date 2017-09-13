@@ -8,7 +8,8 @@
 // @match        http://www.hclips.com/videos/*
 // @match        http://www.yeptube.com/video/*
 // @match        https://www.ceporn.net/video/*
-// @updateURL    https://github.com/brbsix/userscripts.js/raw/master/Ad%20Overlay%20Bypass.user.js
+// @updateURL    https://raw.githubusercontent.com/brbsix/userscripts.js/master/Ad%20Overlay%20Bypass.meta.js
+// @downloadURL  https://raw.githubusercontent.com/brbsix/userscripts.js/master/Ad%20Overlay%20Bypass.user.js
 // @grant        GM_log
 // ==/UserScript==
 

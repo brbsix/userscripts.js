@@ -11,21 +11,3 @@
 // @downloadURL  https://raw.githubusercontent.com/brbsix/userscripts.js/master/LinkedIn%20Signup%20Bypass.user.js
 // @grant        GM_log
 // ==/UserScript==
-
-(function () {
-    'use strict';
-
-    function removeNodes (selector) {
-        document.querySelectorAll(selector).forEach(
-            e => e.parentNode.removeChild(e)
-        );
-    }
-
-    GM_log(GM_info.script.name);
-
-    // hide signup overlay
-    removeNodes('#advocate-modal');
-
-    // hide signup card
-    removeNodes('.reg-upsell');
-})();
