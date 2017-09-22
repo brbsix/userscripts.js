@@ -14,6 +14,10 @@
 (function () {
     'use strict';
 
+    // Ensure the following lines are added to your uBlock filters:
+    // ||linx.cloud/ajax.php
+    // linx.cloud##script:inject(noeval.js)
+
     function log () {
         GM_log(...[arguments.length ? GM_info.script.name + ':' : GM_info.script.name, ...arguments]);
     }
