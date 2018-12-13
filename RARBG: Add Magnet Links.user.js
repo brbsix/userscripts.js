@@ -8,7 +8,7 @@
 // @match        http://rarbg.to/*
 // @match        https://rarbg.to/*
 // @icon         http://www.rarbg.to/favicon.ico
-// @require      https://wzrd.in/standalone/p-throttle@1.1.0#sha512=3bc47fba0343d176e944608dbb316608d1a0c08edeec1ba412e3ad2e6467aee521d3cc5baa5bbe6635b021253fa32926b6bb8be684473a40ca7c280ddd8673cb
+// @require      https://wzrd.in/standalone/p-throttle@2.0.0#sha512=847ce710d42e6b8d9aeddafd2526a56e0fae69c350d6bdc5628d105a5201590238bccf84e554d635660ae9f29e7f84f0bbbccad03350c685a2b79c545e529bd4
 // @updateURL    https://raw.githubusercontent.com/brbsix/userscripts.js/master/RARBG:%20Add%20Magnet%20Links.meta.js
 // @downloadURL  https://raw.githubusercontent.com/brbsix/userscripts.js/master/RARBG:%20Add%20Magnet%20Links.user.js
 // @grant        GM_addStyle
